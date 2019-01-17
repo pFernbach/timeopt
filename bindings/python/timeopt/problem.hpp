@@ -50,6 +50,8 @@ namespace timeopt{
         .def("setConfigurationFile", &Problem::setConfigurationFile, bp::args("string"), "Set Configuration File for time optimization solver" )
         .def("setTimeoptSolver", &Problem::setTimeoptSolver, bp::args("string"), "Set Time optimization Problem" )
         .def("solve", &Problem::solve, "Solve Time optimization Problem" )
+
+        .def("getMass", &Problem::getMass, "Get Robot Mass")
         ;
       }
    

@@ -78,7 +78,9 @@
       int getNumSize() {
         return std::floor(planner_setting_.get(momentumopt::PlannerDoubleParam_TimeHorizon) / planner_setting_.get(momentumopt::PlannerDoubleParam_TimeStep));
       }
-
+      double getMass(){
+        return mass_;
+      }
       private:  
         PhaseInfoVector phases_;
         Vector3d init_com_, final_com_;

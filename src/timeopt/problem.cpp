@@ -61,6 +61,12 @@ namespace timeopt
 
     dyn_optimizer_.initialize(planner_setting_, dynamic_state_, &contact_plan);
     dyn_optimizer_.optimize(ref_sequence_);
+
+    time_traj_.resize(getNumSize());
+      int size = getNumSize();
+      time_traj_(0) = dyn_optimizer_.dynamicsSequence().dynamicsState(0).time();
+      for (int i=1; i<size; i++)
+        time_traj_(i) = dyn_optimizer_.dynamicsSequence().dynamicsState(i).time() + time_traj_(i-1);
   }
   
   
