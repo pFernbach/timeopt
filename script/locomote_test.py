@@ -178,19 +178,18 @@ MASS = tp.getMass()
 for k in range(tp.getTrajectorySize()):
   if k == 0 :
       a = 1
-   #   cs.contact_phases[cnt].time_trajectory[0] = tp.getTime(k)
+      cs.contact_phases[cnt].time_trajectory[0] = tp.getTime(k)
   else:
       if not state[k-1] == state[k]:
           cnt = cnt+1
-        #  cs.contact_phases[cnt].time_trajectory[0] = (tp.getTime(k))
+          cs.contact_phases[cnt].time_trajectory[0] = (tp.getTime(k))
       else:
           cnt = cnt
-        #  cs.contact_phases[cnt].time_trajectory.append(tp.getTime(k))
+          cs.contact_phases[cnt].time_trajectory.append(tp.getTime(k))
 
   u[0:3] = tp.getLMOM(k).tolist()
   u[3:6] = tp.getAMOM(k).tolist()
-
-  #cs.contact_phases[cnt].control_trajectory.append(np.matrix(u))
+  cs.contact_phases[cnt].control_trajectory.append(np.matrix(u))
 
   x[0:3] = tp.getCOM(k).tolist()
   x[3:6] = tp.getLMOM(k).tolist()
@@ -198,8 +197,7 @@ for k in range(tp.getTrajectorySize()):
   if k == 0:
     x[6:9] = ((tp.getLMOM(k)/MASS) / tp.getTime(k)).tolist()
   x[6:9] = (((tp.getLMOM(k)/MASS) - (tp.getLMOM(k-1)/MASS)) / (tp.getTime(k)-tp.getTime(k-1))).tolist()
-  #cs.contact_phases[cnt].state_trajectory.append(np.matrix(x))
+  cs.contact_phases[cnt].state_trajectory.append(np.matrix(x))
 
-#filename = OUTPUT_DIR + "/" + '1' + OUTPUT_SEQUENCE_FILE
-#cs.saveAsXML(filename, "ContactSequence")
+cs.saveAsXML("Result.xml", "ContactSequence")
 print("")
