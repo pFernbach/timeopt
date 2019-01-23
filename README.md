@@ -5,7 +5,8 @@ This is module of time-optimization by B. Ponton for using HPP.
 To use this in Ubuntu 14.04 and 16.04
 
 (1) Download and intstall the original time-optimization.
-```git clone https://git-amd.tuebingen.mpg.de/bponton/timeoptimization
+```
+git clone https://git-amd.tuebingen.mpg.de/bponton/timeoptimization
    cd timeoptimization
    ./src/catkin/third_party/catkin/bin/catkin_make
    source ./devel/setup.bash
@@ -20,7 +21,8 @@ To use this in Ubuntu 14.04 and 16.04
 ```
 (3) Run Script
 
-```ipython /script/biding_test.py
+```
+ipython /script/biding_test.py
 ```
 
 
