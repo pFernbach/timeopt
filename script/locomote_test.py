@@ -38,7 +38,6 @@ isInit = True
 isFinal = True
 
 for k in range(num_phases):
-    print k, "th"
     contact_phase = cs.contact_phases[k]
     init_guess_provided = (len(contact_phase.state_trajectory) > 0)
 
@@ -145,7 +144,7 @@ tp.setInitialPose(True, np.matrix((-0.086, 0.15,-0.92)).transpose(), rot, timeop
 tp.setInitialPose(True, np.matrix((0.4, 0.3, 0.0)).transpose(), rot, timeopt.EndeffectorID.RH)
 tp.setInitialPose(True, np.matrix((-0.4, 0.3, 0.0)).transpose(), rot, timeopt.EndeffectorID.LH)
 
-tp.setMass(60.0);
+tp.setMass(88.0);
 tp.getMass();
 tp.setFinalCOM(cs.contact_phases[num_phases-1].final_state[0:3])
 
@@ -155,7 +154,7 @@ for i in range(len(LF)):
     tp.setPhase(i + len(RF), timeopt.phase(timeopt.EndeffectorID.LF, LF_time[i][0, 0], LF_time[i][0, 1], LF[i].translation, LF[i].rotation))
 
 import os
-cfg_path=str(os.path.dirname(os.path.abspath(__file__))) + '/../../../../config/' + 'cfg_momSc_demo03.yaml'
+cfg_path=str(os.path.dirname(os.path.abspath(__file__))) + '/../config/' + 'cfg_timeopt_demo01.yaml'
 tp.setConfigurationFile(cfg_path)
 tp.setTimeoptSolver(cfg_path)
 tp.solve()
@@ -200,4 +199,5 @@ for k in range(tp.getTrajectorySize()):
   cs.contact_phases[cnt].state_trajectory.append(np.matrix(x))
 
 cs.saveAsXML("Result.xml", "ContactSequence")
+print "Generated Result.xml"
 print("")

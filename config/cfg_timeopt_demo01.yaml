@@ -6,7 +6,7 @@ planner_variables:
 
   heuristic: TimeOptimization  # Types: TrustRegion, SoftConstraint, TimeOptimization #
   n_act_eefs: 2
-  time_step: 0.1
+  time_step: 0.05
   time_horizon: 9.5
   external_force: [0.00, 0.00, 0.00]
   com_displacement: [0.20, 1.05, 0.6]
@@ -41,7 +41,7 @@ planner_variables:
   cop_range_lf: [-0.08,  0.08, -0.03,  0.03]
   cop_range_rh: [-0.03,  0.03, -0.03,  0.03]
   cop_range_lh: [-0.03,  0.03, -0.03,  0.03]
-  max_eef_lengths: [0.82,  0.82,  0.60,  0.60]
+  max_eef_lengths: [0.75,  0.75,  0.60,  0.60]
 
   ####################
   # Dynamics weights #
