@@ -12,7 +12,6 @@ cs = ContactSequenceHumanoid(0)
 CONTACT_SEQUENCE_XML_TAG = "ContactSequence"
 
 cs.loadFromXML("contact_sequence.xml", CONTACT_SEQUENCE_XML_TAG)
-
 q_init = cs.contact_phases[0].reference_configurations[0].copy()
 num_phases = cs.size()
 
@@ -153,8 +152,10 @@ for i in range(len(RF)):
 for i in range(len(LF)):
     tp.setPhase(i + len(RF), timeopt.phase(timeopt.EndeffectorID.LF, LF_time[i][0, 0], LF_time[i][0, 1], LF[i].translation, LF[i].rotation))
 
+print "set configuration file for time-optimization"
 import os
 cfg_path=str(os.path.dirname(os.path.abspath(__file__))) + '/../config/' + 'cfg_timeopt_demo01.yaml'
+
 tp.setConfigurationFile(cfg_path)
 tp.setTimeoptSolver(cfg_path)
 tp.solve()
@@ -198,6 +199,7 @@ for k in range(tp.getTrajectorySize()):
   x[6:9] = (((tp.getLMOM(k)/MASS) - (tp.getLMOM(k-1)/MASS)) / (tp.getTime(k)-tp.getTime(k-1))).tolist()
   cs.contact_phases[cnt].state_trajectory.append(np.matrix(x))
 
+print "save resultant trajectories by time optimization"
 cs.saveAsXML("Result.xml", "ContactSequence")
 print "Generated Result.xml"
 print("")
