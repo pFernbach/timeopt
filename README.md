@@ -22,7 +22,7 @@ git clone https://git-amd.tuebingen.mpg.de/bponton/timeoptimization
 (3) Run Script
 
 ```
-ipython /script/biding_test.py
+    ipython /script/biding_test.py
 ```
 
 
