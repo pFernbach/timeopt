@@ -1,7 +1,7 @@
 # Time-Optimization for HPP
 This is module of time-optimization by B. Ponton for using HPP.
 
-# Install Procedure
+- Install Procedure
 To use this in Ubuntu 14.04 and 16.04
 
 (1) Download and intstall the original time-optimization.
