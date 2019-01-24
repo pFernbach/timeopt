@@ -38,6 +38,7 @@ namespace timeopt{
         .def("setPhase",&Problem::setPhase, (bp::arg("index"), bp::arg("phase")),"Set ith phase.")
         .def("setMass",&Problem::setMass, (bp::args("mass")),"Set robot mass.")
         .def("setFinalCOM",&Problem::setFinalCOM, (bp::arg("COM")),"Set Final COM (Vector3d).")
+        .def("setViapoint",&Problem::setViapoint, (bp::args("time", "viapoint(Vector3d)")), "Set Viapoint (time, Vector3d).")  
 
         .def("resize",&Problem::resize, (bp::args("size")),"Resize phases size.")
         .def("getTrajectorySize", &Problem::getNumSize, "get Trajectory length")

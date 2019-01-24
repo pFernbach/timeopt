@@ -24,21 +24,7 @@ using namespace std;
         typedef Eigen::Matrix<double, 8, 1> Vector8d;
 
       public:
-        InitialState()
-        : ini_com_(Eigen::Vector3d(.0, .0, .0))
-        , amom_(Eigen::Vector3d(.0, .0, .0))
-        , lmom_(Eigen::Vector3d(.0, .0, .0))
-        , eef_frc_rf_(Eigen::Vector3d(.0, .0, .5))
-        , eef_frc_lf_(Eigen::Vector3d(.0, .0, .5))
-        , eef_frc_rh_(Eigen::Vector3d(.0, .0, .0))
-        , eef_frc_lh_(Eigen::Vector3d(.0, .0, .0))
-        {
-          eef_rf.setZero();
-          eef_lf.setZero();
-          eef_rh.setZero();
-          eef_lh.setZero();
-        };
-
+        InitialState();
         ~InitialState(){};
         
         inline void setCOM(const Eigen::Vector3d& com) {
@@ -61,7 +47,10 @@ using namespace std;
         
       private:
         Eigen::Vector3d ini_com_, amom_, lmom_;
-        Eigen::Vector3d eef_frc_rf_, eef_frc_lf_, eef_frc_lh_, eef_frc_rh_;
+        Eigen::Vector3d eef_frc_rf_;
+        Eigen::Vector3d eef_frc_lf_;
+        Eigen::Vector3d eef_frc_lh_;
+        Eigen::Vector3d eef_frc_rh_;
         Vector8d eef_rf, eef_lf, eef_rh, eef_lh;
         EndeffectorID ee_id;
         YAML::Node init_cfg;
@@ -112,13 +101,11 @@ using namespace std;
     {
       public:
         EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+        typedef Eigen::Matrix<double, 4, 1> Viapoint;
+        typedef std::vector<Viapoint,Eigen::aligned_allocator<Viapoint>> ViapointVector;
 
       public:
-        ContactPlanner()
-        : time_horizon_(0.0)
-        , robot_mass_(0.0)
-        , com_displacement_(Eigen::Vector3d(.0, .0, .0))
-        {};
+        ContactPlanner();
         ~ContactPlanner(){};
         
         void initialize(const std::string cfg_path, const InitialState& init_state, const ContactState& contact_state);
@@ -132,11 +119,19 @@ using namespace std;
         inline void setFinalCOM(const Eigen::Vector3d & end_com){
           end_com_ = end_com;
         }
+        inline void setViapoint(const double& time, const Eigen::Vector3d & via){
+          Viapoint v;
+          v << time, via(0), via(1), via(2);     
+          viapoints_.push_back(v);
+        }
         void saveToFile();
 
       private:
         double robot_mass_, time_horizon_;
         Eigen::Vector3d com_displacement_, end_com_;
+        unsigned int num_com_viapoints_;
+        ViapointVector viapoints_;
+
         std::string file_location_;
         
         momentumopt::PlannerSetting planner_setting_;

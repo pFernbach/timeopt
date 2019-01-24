@@ -56,6 +56,9 @@
         final_com_ = com;
         planner_->setFinalCOM(com);
       }
+      void setViapoint(const double& time, const Vector3d& point){
+        planner_->setViapoint(time, point);
+      }
       void resize(const Index index){
         phases_.resize(index);
         contact_state_->resize(index);

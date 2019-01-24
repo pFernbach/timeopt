@@ -2,6 +2,20 @@
 
 namespace timeopt
 {
+  InitialState::InitialState()
+        : ini_com_(Eigen::Vector3d(.0, .0, .0))
+        , amom_(Eigen::Vector3d(.0, .0, .0))
+        , lmom_(Eigen::Vector3d(.0, .0, .0))
+        , eef_frc_rf_(Eigen::Vector3d(.0, .0, .5))
+        , eef_frc_lf_(Eigen::Vector3d(.0, .0, .5))
+        , eef_frc_rh_(Eigen::Vector3d(.0, .0, .0))
+        , eef_frc_lh_(Eigen::Vector3d(.0, .0, .0))
+    {
+          eef_rf.setZero();
+          eef_lf.setZero();
+          eef_rh.setZero();
+          eef_lh.setZero();
+    }
   void InitialState::setEEForceRatio(const Eigen::Vector3d& ratio, EndeffectorID ee){
     switch (ee){
       case RF:
@@ -148,6 +162,11 @@ namespace timeopt
     file_out << contact_cfg;
   }
 
+  ContactPlanner::ContactPlanner()
+        : time_horizon_(0.0)
+        , robot_mass_(0.0)
+        , com_displacement_(Eigen::Vector3d(.0, .0, .0))
+        {}
   void ContactPlanner::initialize(const std::string cfg_path, const InitialState& init_state, const ContactState& contact_state){
     planner_setting_.initialize(cfg_path);
     file_location_ = cfg_path;
@@ -170,6 +189,13 @@ namespace timeopt
     com_displacement_ = end_com_ - init_com;
     cfg_pars["planner_variables"]["com_displacement"] = com_displacement_;
     cfg_pars["planner_variables"]["com_displacement"].SetStyle(YAML::EmitterStyle::Flow);
+
+    cfg_pars["planner_variables"]["num_com_viapoints"] = viapoints_.size();
+    
+    for (size_t i=0; i<viapoints_.size(); i++){
+      cfg_pars["planner_variables"]["com_viapoints"]["via"+std::to_string(i)] = viapoints_[i];
+      cfg_pars["planner_variables"]["com_viapoints"]["via"+std::to_string(i)].SetStyle(YAML::EmitterStyle::Flow);
+    }
     std::ofstream file_out(file_location_.substr(0, file_location_.size()-5)+"_final.yaml");
     file_out << init_cfg << endl << endl << contact_cfg << endl << endl << cfg_pars;
   }
