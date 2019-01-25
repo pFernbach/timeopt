@@ -86,7 +86,7 @@ using namespace std;
         void save();
         void saveToFile();
         double getTimeHorizon(){
-          return phases_[phases_.size()-1].end_time - 0.4;
+          return phases_[phases_.size()-1].end_time;
         };
 
       private:
