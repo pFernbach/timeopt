@@ -40,6 +40,12 @@
         init_com_ = com;
         init_state_->setCOM(com);
       }
+      void setInitialLMOM(const Vector3d& lmom){
+        init_state_->setLMOM(lmom);
+      }
+      void setInitialAMOM(const Vector3d& amom){
+        init_state_->setAMOM(amom);
+      }
       void setInitialPose(const bool active, const Vector3d& pos, const Matrix3d& rot, EndeffectorID ee){
         Quaterniond quat(rot);
         init_state_->setInitialPose(active, pos, quat, ee);

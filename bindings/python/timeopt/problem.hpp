@@ -34,6 +34,8 @@ namespace timeopt{
         .def("getFinalCOM",&Problem::getFinalCOM,"Returns final COM")
 
         .def("setInitialCOM",&Problem::setInitialCOM, (bp::arg("COM")),"Set Initial COM (Vector3d).")
+        .def("setInitialLMOM",&Problem::setInitialLMOM, (bp::arg("lmom")),"Set Initial LMOM (Vector3d).")
+        .def("setInitialAMOM",&Problem::setInitialAMOM, (bp::arg("amom")),"Set Initial AMOM (Vector3d).")
         .def("setInitialPose",&Problem::setInitialPose, (bp::args("active", "pos", "rot", "EE_id")),"Set Initial Pose.")
         .def("setPhase",&Problem::setPhase, (bp::arg("index"), bp::arg("phase")),"Set ith phase.")
         .def("setMass",&Problem::setMass, (bp::args("mass")),"Set robot mass.")
