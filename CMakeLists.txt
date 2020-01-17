@@ -1,5 +1,9 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
+SET(PROJECT_NAME timeopt)
+SET(PROJECT_DESCRIPTION "COM Generator")
+SET(PROJECT_URL "http://github.com/ggory15")
+
 INCLUDE(cmake/base.cmake)
 INCLUDE(cmake/boost.cmake)
 INCLUDE(cmake/eigen.cmake)
@@ -7,9 +11,7 @@ INCLUDE(cmake/python.cmake)
 INCLUDE(cmake/ide.cmake)
 INCLUDE(cmake/apple.cmake)
 
-SET(PROJECT_NAME timeopt)
-SET(PROJECT_DESCRIPTION "COM Generator")
-SET(PROJECT_URL "http://github.com/ggory15")
+
 OPTION(INSTALL_DOCUMENTATION "Generate and install the documentation" OFF)
 
 SET(DOXYGEN_USE_MATHJAX YES)
